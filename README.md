@@ -1,12 +1,16 @@
-# 100daysofcode
+# 100DaysOfCode
 
-RULES- 
+**RULES**- 
+
+# This is an <h1> tag
+## This is an <h2> tag
+###### This is an <h6> tag
 
 Code atleast for 1hour everyday for the next 100 Days.
 Post your progress on insta/twitter/github.
 Don't forget to write what you have learnt each day.
 
-TARGETS-
+**TARGETS-** 
 Qaudraped
 Studying UI
 Learning functions,classes,loops,OOP
