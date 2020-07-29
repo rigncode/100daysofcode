@@ -1,0 +1,69 @@
+  
+ #################################################################
+######################    Object Builder(basic)    ########################
+ #################################################################
+#Author:Himnanshi Ahuja
+#Email:himansheeahuja@gmail.com
+
+
+
+import maya.cmds as cmds
+import maya.mel as mel
+def ui():
+    if cmds.window('Win',exists=True):
+        cmds.deleteUI('Win')
+        
+    if cmds.windowPref('Win',exists=True):
+       cmds.windowPref('Win',r=True)
+        
+    cmds.window('Win',title='OBJECT BUILDER',h=400,w=250)
+    cmds.showWindow('Win')
+    
+    cmds.columnLayout('Lyt',adj=True)  #(adj=adjustable Column)
+    cmds.text(l='Input The  Amount')
+    cmds.intField('intFCube')  #where you can type integers)
+    #this will create a button,c=command,that button will give this commnand)
+    cmds.button ('BtnCube',label='Cube', c='createCube()')  
+    cmds.separator(h=8)
+    
+    
+    cmds.button('BtnSphere',label='Sphere',c='createSphere()')
+    cmds.separator(h=8)
+    
+    
+    
+    cmds.button('BtnCylinder',label='Cylinder',c='createCylinder()')
+    cmds.separator(h=8)
+     
+ 
+#when I will click on the cube button.
+#it will run this function.
+#1) it will query the intField(it will get the information of what is typed in intField)
+#then it will run the loop and make cube.    
+def createCube():
+    intFld_Cube=cmds.intField('intFCube',q=True,value=True)
+   
+    for i in range(intFld_Cube):
+        cmds.polyCube(h=5,w=5,n=('Cube_'+str(i)))
+    
+def createSphere():
+    intFld_Cube=cmds.intField('intFCube',q=True,value=True)
+    
+    for i in range (intFld_Cube):
+        cmds.polySphere(r=5,n=('Sphere_'+str(i)))
+        
+def createCylinder():
+    intFld_Cube=cmds.intField('intFCube',q=True,value=True)
+    
+    for i in range(intFld_Cube):
+        cmds.polyCylinder(r=3,h=5,n=('Cylinder_'+str(i)))
+        
+
+    
+    for i in range(intFld_Cube):
+        cmds.polyCone(n=('Cone_'+str(i)))
+        
+                            
+               
+    
+ui()
