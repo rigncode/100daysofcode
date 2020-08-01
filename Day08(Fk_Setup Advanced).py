@@ -1,3 +1,10 @@
+##################################################################################
+############################## FK_CHAIN ##########################################
+##################################################################################
+
+#Author:Himanshi Ahuja
+#Email:himansheeahuja@gmail.com
+
 #Select a joint and run the script.
 #(It will make controllers with offset group on every joint in the hierarchy including their connctions)
 import maya.cmds as cmds
