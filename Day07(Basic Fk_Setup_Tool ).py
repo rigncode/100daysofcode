@@ -1,5 +1,13 @@
+##################################################################################
+############################## FK_CHAIN ##########################################
+##################################################################################
+#Author:Himanshi Ahuja
+#Email:himansheeahuja@gmail.com
+
 #Select a joint and run the script.
 #(It will make controllers with offset group with constraints)
+
+
 import maya.cmds as cmds
 def fk_controller_setup():
     JointChain=cmds.ls(selection=True)
