@@ -1,0 +1,127 @@
+
+######################### AUTO RIG  ########################################
+import pymel.core as pm
+
+
+newWindow='Auto_Rig_Arm'
+
+def ui():
+    if(pm.window(newWindow,q=True,exists=True)):
+        pm.deleteUI(newWindow)
+        
+    if(pm.windowPref(newWindow,q=True,exists=True)):
+        pm.windowPref(newWindow,r=True)
+        
+    myWindow=pm.window(newWindow,t='Auto Arm Rig',w=150,h=235)
+    main_layout=pm.columnLayout()
+    
+    #naming option (option menu)
+    pm.text('naming_Text',l='Step1: Set name options')
+    pm.rowColumnLayout(nc=4,cw=[(1,20),(2,40),(3,40),(4,50)])
+    pm.text('ori_Txt',label='Ori:')
+    pm.optionMenu('ori_Menu',cc='colorChange()')
+    pm.menuItem(label='lf_')
+    pm.menuItem(label='rt_')
+    pm.menuItem(label='ct_')
+    pm.text('label_Txt',label='Label:')
+    pm.optionMenu('label_Menu')
+    pm.menuItem(label='arm')
+    pm.menuItem(label='leg')
+    pm.setParent(main_layout)
+    pm.separator('name_Sep',w=150,h=5)
+    
+    
+    #set the rig type(radio button)
+    pm.text('rigType_Text',l='Step 2: Set rig type')
+    pm.radioButtonGrp('armType_Btn',labelArray3=('IK','FK','IK/FK'),numberOfRadioButtons=3,columnWidth3=[50,50,50],select=3,cc='armTypeVis()')
+    pm.separator('type_Sep',w=150,h=5)
+    
+    #set icon options(option menu)
+    pm.text('conSet_Text',l='Step 3: Set icon options')
+    pm.rowColumnLayout(nc=2,cw=[(1,90),(2,60)])
+    pm.text('ikStyle_Text',label='IK Icon Style:')
+    pm.optionMenu('ikIcon_Menu')
+    pm.menuItem(label='Box')
+    pm.menuItem(label='4 Arrows')
+    pm.menuItem(label='4 Pin')
+    pm.text('fkStyle_Text',label='FK Icon Style:')
+    pm.optionMenu('fkIcon_Menu')
+    pm.menuItem(label='Circle')
+    pm.menuItem(label='Turn Arrows')
+    pm.text('handStyle_Text',label='Hand Icon Style:')
+    pm.optionMenu('handIcon_Menu')
+    pm.menuItem(label='Circle')
+    pm.menuItem(label='COG')
+    pm.text('pvStyle_Text',label='PV Icon Style:')
+    pm.optionMenu('pvIcon_Menu')
+    pm.menuItem(label='Dmnd')
+    pm.menuItem(label='Arrow')
+    pm.setParent(main_layout)
+    pm.button('testIcon_Btn',l='Make test icons to set scale',w=150)
+    pm.separator('style_Sep',w=150,h=5)
+                
+    #pick the color(iconeTextButton and color slider)
+    pm.text('armColor_Texxt',l='Step 4: Pick icon color')
+    pm.gridLayout(nr=1,nc=5,cellWidthHeight=[30,20])
+    pm.iconTextButton('darkBlue_Btn',bgc=[.000,.816,.373])
+    pm.iconTextButton('LightBlue_Btn',bgc=[0,6,3])
+    pm.iconTextButton('brown_Btn',bgc=[0,0,1])
+    pm.iconTextButton('red_Btn',bgc=[1,0,0])
+    pm.iconTextButton('yellow_Btn',bgc=[1,1,0]) 
+    pm.setParent(main_layout)
+    pm.colorIndexSliderGrp('armColor',w=150,h=20,cw2=(150,0),min=0,max=31,value=7)
+    pm.separator('color_Sep',w=150,h=5)
+    
+    #pole vector options (radio button)
+    pm.text('PV_Text',label='Step 5: Set IK elbow options')
+    pm.radioButtonGrp('addPVElbow_Btn',labelArray2=('Twist','Pole Vector'),numberOfRadioButtons=2,columnWidth2=[65,85],select=2,cc='pvChanger()')
+    pm.separator('pv_Sep',w=150,h=5)
+
+    pm.button('final_Btn',l='Finalize the Arm',w=150)
+    pm.showWindow()
+
+
+def colorChange():
+    ori_opt=pm.optionMenu('ori_Menu',q=True,sl=True)
+    if ori_opt==1:
+        ori_color=7
+    if ori_opt==2:
+        ori_color=28
+    if ori_opt==3:
+        ori_color=18
+
+    pm.colorIndexSliderGrp('armColor',edit=True,v=ori_color)    
+
+def armTypeVis():
+    armType=pm.radioButtonGrp('armType_Btn',q=True,sl=True)
+    if armType==1:
+        ik_val=1
+        fk_val=0
+        ikfk_val=0
+    if armType==2:
+        ik_val=0
+        fk_val=1
+        ikfk_val=0
+    if armType==3:
+        ik_val=1
+        fk_val=1
+        ikfk_val=1   
+        
+    pm.text('ikStyle_Text',e=True,vis=ik_val)
+    pm.optionMenu('ikIcon_Menu',e=True,vis=ik_val)
+    pm.text('fkStyle_Text',e=True,vis=fk_val)
+    pm.optionMenu('fkIcon_Menu',e=True,vis=fk_val)
+    pm.text('handStyle_Text',e=True,vis=ikfk_val)
+    pm.optionMenu('handIcon_Menu',e=True,vis=ik_val)
+    pm.text('pvStyle_Text',e=True,vis=ikfk_val)
+    pm.optionMenu('pvIcon_Menu',e=True,vis=ik_val)
+    pm.text('PV_Text',e=True,vis=ik_val)
+    pm.radioButtonGrp('addPVElbow_Btn',e=True,vis=ik_val)
+    pm.separator('pv_Sep',e=True,vis=ik_val)
+                     
+                     
+        
+        
+    
+ui()           
+
