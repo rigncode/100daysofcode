@@ -21,9 +21,3 @@ Joint = cmds.joint(n= (str(selected_obj[0])+'_Joint'))
 cmds.delete(cmds.parentConstraint(create_cluster,Joint))
 cmds.delete(create_cluster)
 
-try:
-	newJointName = Joint.split('_')[0]
-
-	cmds.rename(Joint,(newJointName+"_Joint"))
-	
-except:	pass 
