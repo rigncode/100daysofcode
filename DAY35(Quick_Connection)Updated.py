@@ -158,7 +158,7 @@ def create_scale_connection():
 def delete_connections():
     
     for i in DrivenVar:
-        drivenpy = pm.PyNode(i[0])
+        drivenpy = pm.PyNode(i)
         driverpy = pm.PyNode(DriverVar[0])
         try:
             driverpy.scale.disconnect(drivenpy.scale)
