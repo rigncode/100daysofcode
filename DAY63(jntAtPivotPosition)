@@ -1,0 +1,6 @@
+# Creating joints at object's pivot
+selected_object=cmds.ls(sl=True)
+for i in selected_object:
+    store_pos=cmds.xform(i,query=True,pivots=True,worldSpace=True)
+    cmds.select(clear=True)
+    cmds.joint(n=(i+'_jnt'),position=store_pos[0:3])
