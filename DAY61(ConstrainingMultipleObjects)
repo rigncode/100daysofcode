@@ -1,0 +1,15 @@
+#constraining multiple objects
+# select the parent object and then all the child objects. 
+
+import maya.cmds as cmds
+
+def constraining_objs() :
+    
+selected_object=cmds.ls(selection=True)
+parent_object=selected_object[0]
+
+selected_object.remove(selected_object[0])
+print selected_object
+
+for i in selected_object:
+        cmds.parentConstraint(parent_object,i,mo=1)
