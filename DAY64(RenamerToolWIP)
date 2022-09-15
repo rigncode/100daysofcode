@@ -1,0 +1,42 @@
+import maya.cmds as cmds
+
+def checkBoxChanged(checkBox):
+    cmds.checkBox(checkbox,query=True,value=True)
+    
+    if value==True:
+        cmds.
+def window_creation():
+    if cmds.window('renamer',exists=True):
+        cmds.deleteUI('renamer')
+    windowbox=cmds.window('renamer',title='renamerUI',h=300,w=100,s=True)
+    
+    
+    layout=cmds.formLayout()
+    
+    #creating check boxes
+    prefixCB=cmds.checkBox('prefixCB',label='Add Prefix',value= False)
+    suffixCB=cmds.checkBox('suffixCB',label='Add Suffix', value=False)
+    
+    #creating text fields
+    prefixTF=cmds.textField('prefixTF',w=60)
+    suffixTF=cmds.textField('suffixTF',w=60)
+    
+    textA=cmds.text(label='Suffix:')
+    textB=cmds.text(label='Prefix:')
+     
+    
+    #adjusting the items by editting the form layout
+    
+    cmds.formLayout(layout,edit=True,af=[(prefixCB,'left',10),(prefixCB,'top',10)])
+    cmds.formLayout(layout,edit=True,af=[(suffixCB,'left',10),(suffixCB,'top',30)])
+    cmds.formLayout(layout,edit=True,af=[(prefixTF,'left',10),(prefixTF,'top',50)])
+    cmds.formLayout(layout,edit=True,af=[(suffixTF,'left',10),(suffixTF,'top',70)])
+    cmds.formLayout(layout,edit=True,af=[(textA,'left',10),(textA,'top',90)])
+    cmds.formLayout(layout,edit=True,af=[(textB,'left',10),(textB,'top',100)])    
+    cmds.showWindow(windowbox)        
+    
+    
+window_creation()    
+
+
+    
